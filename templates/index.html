@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sentiment Prediction</title>
+    <style>
+        /* General Body Styles */
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(to right, #6a11cb, #2575fc);
+            margin: 0;
+            padding: 0;
+            color: #fff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            text-align: center;
+        }
+
+        /* Container Style */
+        .container {
+            background: rgba(0, 0, 0, 0.6);
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            width: 100%;
+            max-width: 600px;
+        }
+
+        h2 {
+            font-size: 2rem;
+            margin-bottom: 20px;
+            color: #fff;
+            text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Form Styles */
+        form {
+            margin-bottom: 20px;
+        }
+
+        label {
+            font-size: 1.1rem;
+            margin-bottom: 10px;
+            display: block;
+        }
+
+        input[type="text"] {
+            width: 100%;
+            padding: 12px;
+            border-radius: 8px;
+            border: 2px solid #fff;
+            background: #f2f2f2;
+            color: #333;
+            font-size: 1rem;
+            margin-bottom: 20px;
+            transition: border-color 0.3s ease;
+        }
+
+        input[type="text"]:focus {
+            border-color: #2575fc;
+            outline: none;
+        }
+
+        input[type="submit"] {
+            padding: 12px 20px;
+            background-color: #28a745;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #218838;
+            transform: scale(1.05);
+        }
+
+        input[type="submit"]:active {
+            background-color: #1e7e34;
+        }
+
+        /* Result Section */
+        .result {
+            margin-top: 20px;
+            font-weight: bold;
+            font-size: 1.2rem;
+            color: #f8d7da;
+            background: rgba(255, 255, 255, 0.1);
+            padding: 15px;
+            border-radius: 10px;
+            transition: background-color 0.3s ease;
+        }
+
+        .result.success {
+            color: #d4edda;
+            background: rgba(52, 198, 83, 0.2);
+        }
+
+        .result.error {
+            color: #f8d7da;
+            background: rgba(255, 99, 71, 0.2);
+        }
+
+        /* Responsive Styles */
+        @media (max-width: 600px) {
+            .container {
+                width: 90%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Tweet Sentiment Prediction</h2>
+        <form action="/predict" method="post">
+            <label for="tweet">Enter your tweet:</label>
+            <input type="text" id="tweet" name="tweet" placeholder="Type something..." required>
+            <input type="submit" value="Predict">
+        </form>
+
+        {% if prediction_text %}
+            <div class="result {{ 'success' if prediction_text == 'Positive' else 'error' }}">
+                {{ prediction_text }}
+            </div>
+        {% endif %}
+    </div>
+</body>
+</html>
